@@ -1,47 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Check Your Loyalty Points</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        input { padding: 10px; margin: 5px; }
-        button { padding: 10px; background: blue; color: white; border: none; }
-        #result { margin-top: 20px; font-size: 20px; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Your Loyalty Points</title>
 </head>
 <body>
+  <h1>Check Your Loyalty Points</h1>
+  <form id="pointsForm">
+    <label for="customerID">Enter your Customer ID:</label>
+    <input type="text" id="customerID" name="customerID" required>
+    <button type="submit">Check Points</button>
+  </form>
 
-    <h2>Check Your Loyalty Points</h2>
-    <input type="text" id="customerID" placeholder="Enter Customer ID or Phone">
-    <button onclick="checkPoints()">Check Points</button>
+  <h2>Your Total Points: <span id="pointsDisplay">N/A</span></h2>
 
-    <div id="result"></div>
+  <script>
+    document.getElementById("pointsForm").addEventListener("submit", function(event) {
+      event.preventDefault();
 
-    <script>
-        async function checkPoints() {
-            let input = document.getElementById("customerID").value;
-            if (!input) {
-                alert("Please enter a customer ID or phone number.");
-                return;
-            }
+      var customerID = document.getElementById("customerID").value;
+      var url = "YOUR_DEPLOYED_WEB_APP_URL?customerID=" + encodeURIComponent(customerID);
 
-            let url = "YOUR_GOOGLE_APPS_SCRIPT_URL?id=" + encodeURIComponent(input) + "&phone=" + encodeURIComponent(input);
-            
-            try {
-                let response = await fetch(url);
-                let data = await response.json();
-                if (data.name) {
-                    document.getElementById("result").innerText = `Hello ${data.name}, you have ${data.points} points.`;
-                } else {
-                    document.getElementById("result").innerText = "Customer not found.";
-                }
-            } catch (error) {
-                document.getElementById("result").innerText = "Error fetching data.";
-            }
-        }
-    </script>
-
+      // Fetch data from the Apps Script Web App
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          // Display the total points or an error message
+          document.getElementById("pointsDisplay").innerText = data.totalPoints;
+        })
+        .catch(error => {
+          console.error("Error fetching points:", error);
+          document.getElementById("pointsDisplay").innerText = "Error fetching points.";
+        });
+    });
+  </script>
 </body>
 </html>
