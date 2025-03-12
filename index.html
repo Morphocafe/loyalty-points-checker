@@ -26,12 +26,12 @@
       fetch(url)
         .then(response => response.json())
         .then(data => {
-          if (data.totalPoints === "Customer not found") {
+          if (data.totalpoints === "Customer not found") {
             document.getElementById("pointsDisplay").innerText = "Customer not found.";
           } else if (data.error) {
             document.getElementById("pointsDisplay").innerText = data.error;
           } else {
-            document.getElementById("pointsDisplay").innerText = data.totalPoints;
+            document.getElementById("pointsDisplay").innerText = data.totalpoints;
           }
         })
         .catch(error => {
