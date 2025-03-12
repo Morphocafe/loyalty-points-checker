@@ -20,7 +20,7 @@
       event.preventDefault();
 
       var customerID = document.getElementById("customerID").value;
-      var url = "YOUR_DEPLOYED_WEB_APP_URL?customerID=" + encodeURIComponent(customerID);
+      var url = "https://script.google.com/macros/s/AKfycbx8Vj50bwitCXX68_Fr3a2sfO0RrvfPGwssUP4UBA_cpof2xn9HWRgOLWlE_ru8kjZk/exec" + encodeURIComponent(customerID);
 
       // Fetch data from the Apps Script Web App
       fetch(url)
