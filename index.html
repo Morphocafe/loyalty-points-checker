@@ -66,7 +66,7 @@
         async function checkPoints() {
             let phone = document.getElementById("phone").value.trim();
             if (!phone) {
-                alert("Please enter your phone number eg.9XXXXXXXX.");
+                alert("Please enter your phone number");
                 return;
             }
 
@@ -98,7 +98,7 @@
     <h2>Check Your Loyalty Points</h2>
 
     <!-- Input and Button -->
-    <input type="text" id="phone" placeholder="Enter your phone number">
+    <input type="text" id="phone" placeholder="Enter your phone number (eg.9XXXXXXXX)">
     <button onclick="checkPoints()">Check Points</button>
 
     <!-- Result Display -->
