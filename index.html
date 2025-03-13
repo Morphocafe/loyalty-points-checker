@@ -5,10 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check Your Loyalty Points</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
-        input { padding: 10px; width: 250px; }
-        button { padding: 10px; margin-top: 10px; cursor: pointer; }
-        #result { margin-top: 30px; font-size: 25px; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://github.com/morphocafeandstudio/loyalty-points-checker/blob/main/background.png?raw=true'); /* Set background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #brand-logo {
+            width: 200px; /* Adjust the logo size */
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: black; /* Title color */
+            margin-bottom: 20px;
+            font-size: 24px; /* Larger title */
+        }
+
+        input {
+            padding: 15px;
+            width: 300px;
+            font-size: 25px; /* Larger input text */
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            padding: 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 22px; /* Larger button text */
+            background-color: #007BFF;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: black;
+        }
     </style>
     <script>
         async function checkPoints() {
@@ -28,12 +80,28 @@
                     `Customer ID: ${data.customerID}\nTotal Points: ${data.totalPoints}`;
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("phone").addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    checkPoints();
+                }
+            });
+        });
     </script>
 </head>
 <body>
+    <!-- Brand Logo -->
+    <img id="brand-logo" src="https://github.com/morphocafeandstudio/loyalty-points-checker/blob/main/morpho%20logo.png?raw=true" alt="Brand Logo">
+
+    <!-- Title -->
     <h2>Check Your Loyalty Points</h2>
+
+    <!-- Input and Button -->
     <input type="text" id="phone" placeholder="Enter your phone number">
     <button onclick="checkPoints()">Check Points</button>
+
+    <!-- Result Display -->
     <p id="result"></p>
 </body>
 </html>
